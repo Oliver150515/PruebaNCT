@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Account, Accounts } from '../interfaces/Account.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,8 @@ import { Injectable } from '@angular/core';
 export class TrackingAccountService {
 
   private apiUrlBase: string = 'http://63.135.170.173:5000';
+  public accounts: Account[] = [];
+
 
   // HEADERS
   private httpHeaders = new HttpHeaders(
@@ -15,14 +18,15 @@ export class TrackingAccountService {
     }
   );
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
 
-  GetAll() {
     const url = `${this.apiUrlBase}/accounts`;
 
-    return this.http.get(url, {headers: this.httpHeaders} );
-
+    this.http
+      .get<Accounts>(url, {headers: this.httpHeaders})
+      .subscribe((resp) => {
+        this.accounts = resp.data
+      }
+    );
   }
-
-
 }
