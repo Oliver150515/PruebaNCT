@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Transaction, Transactions } from '../../interfaces/Transactions.interface';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { CreateTransaction, Transaction, Transactions } from '../../interfaces/Transactions.interface';
 import { TrackingAccountService } from '../../services/tracking-account.service';
+import { TrackingTransactionService } from '../../services/tracking-transaction.service';
 
 @Component({
   selector: 'app-create',
@@ -11,18 +12,27 @@ import { TrackingAccountService } from '../../services/tracking-account.service'
 })
 export class CreateComponent  {
 
-  transaction = {} as Transaction;
+  transaction = {} as CreateTransaction;
 
 
-  constructor(private accounts: TrackingAccountService) {}
+  constructor(private accountsServices: TrackingAccountService, private transactionsServices: TrackingTransactionService) {}
 
   get Accounts() {
-    return this.accounts.accounts;
+    return this.accountsServices.accounts;
   }
 
+  Create(form: NgForm){
+    console.log(form.value);
+    this.transaction = {
+      concept: form.value.concept.toUpperCase(),
+      description: form.value.description.toLowerCase(),
+      ammount: form.value.ammount,
+      date: form.value.date,
+      accountId: form.value.accountId
+    };
 
-  Create(f: any){
-    console.log(f.value);
+    console.log(this.transactionsServices.create(this.transaction));
+
+    form.reset();
   }
-
 }

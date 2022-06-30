@@ -15,3 +15,11 @@ export interface Transaction {
   createdAt:   Date;
   updatedAt:   Date;
 }
+
+export interface CreateTransaction {
+  concept:     string;
+  description: string;
+  ammount:     number;
+  date:        Date;
+  accountId:   string;
+}

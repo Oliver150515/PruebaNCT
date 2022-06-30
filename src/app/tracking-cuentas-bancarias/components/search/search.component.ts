@@ -15,6 +15,6 @@ export class SearchComponent {
   constructor(private trackingTransaction: TrackingTransactionService) { }
 
   buscar(){
-    console.log(this.term);
+
   }
 }

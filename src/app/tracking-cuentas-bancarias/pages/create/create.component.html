@@ -14,22 +14,22 @@
   <div class="row g-3">
     <div class="col-md-4">
       <label for="txtConcept" class="form-label">Concept *</label>
-      <input type="text" class="form-control" name="txtConcept" ngModel required>
+      <input type="text" class="form-control" name="concept" ngModel required>
     </div>
     <div class="col-md-4">
-      <label for="txtConcept" class="form-label">Description</label>
-      <input type="text" class="form-control" name="txtDescription" ngModel>
+      <label for="txtDescription" class="form-label">Description</label>
+      <input type="text" class="form-control" name="description" ngModel>
     </div>
     <div class="col-md-4">
-      <label for="validationDefaultUsername" class="form-label">Ammount *</label>
-      <input type="number" class="form-control"  name="txtAmmount" ngModel required>
+      <label for="txtAmmount" class="form-label">Ammount *</label>
+      <input type="number" class="form-control"  name="ammount" ngModel required>
     </div>
     <div class="col-md-3">
-      <label for="validationDefault03" class="form-label">Date *</label>
+      <label for="date" class="form-label">Date *</label>
       <input type="date" class="form-control" name="date" ngModel required>
     </div>
     <div class="col-md-3">
-      <label for="validationDefault04" class="form-label">Account *</label>
+      <label for="accountId" class="form-label">Account *</label>
       <select class="form-select" name="accountId" ngModel required>
         <option selected disabled value="">Choose...</option>
         <option *ngFor="let item of Accounts" value="{{item.id}}">{{item.type}}</option>
