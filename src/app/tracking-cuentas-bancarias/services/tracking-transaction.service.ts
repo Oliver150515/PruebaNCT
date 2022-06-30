@@ -32,6 +32,17 @@ export class TrackingTransactionService {
     );
   }
 
+  getByName(term: string){
+    var result = this.transactions.filter((obj)=> {return obj.concept.includes(term.toUpperCase())});
+    if(result.length > 0){
+      this.transactions = result;
+      return true;
+    }
+
+    return false;
+  }
+
+
   create(transaction: CreateTransaction){
     const url = `${this.apiUrlBase}/transactions`;
     this.http.post<Transactions>(url,

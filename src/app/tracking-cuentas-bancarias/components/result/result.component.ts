@@ -10,13 +10,22 @@ import { TrackingTransactionService } from '../../services/tracking-transaction.
 })
 export class ResultComponent {
 
-  private trans: Transaction[] = [];
+  term: string = '';
+  exist:boolean = true;
+
   constructor(private trackingTransactionService: TrackingTransactionService) { }
 
   get transactions(){
-    this.trans = this.trackingTransactionService.transactions;
-    // console.log(this.trackingTransactionService.transactions.filter((objt) => {return objt.concept.includes('PRUEBA')}));
-    return this.trans;
+    return this.trackingTransactionService.transactions;
+  }
+
+  buscar(){
+    if(this.term.length > 0){
+      this.exist = this.trackingTransactionService.getByName(this.term);
+    }
+    else {
+      this.trackingTransactionService.getall();
+    }
   }
 
 

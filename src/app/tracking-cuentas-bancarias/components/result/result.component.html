@@ -1,3 +1,26 @@
+<!-- SEARCH -->
+<div class="row">
+  <div class="col">
+    <form (ngSubmit)="buscar()" autocomplete="off">
+      <input
+        type="text"
+        name="termino"
+        class="form-control"
+        [(ngModel)]="term"
+        placeholder="Buscar por descripcion..."
+        >
+    </form>
+  </div>
+</div>
+
+<hr>
+
+<!-- ERROR CUANDO NO EXISTE  -->
+<div *ngIf="!exist" class="alert alert-danger">
+  No existe transacciones con ese termino
+</div>
+
+
 <div class="row">
   <div *ngFor="let transaction of transactions" class="col-md-4 col-sm-6">
     <div class="card border-info mb-3">
