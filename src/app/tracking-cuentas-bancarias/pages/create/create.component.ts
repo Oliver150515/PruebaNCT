@@ -13,7 +13,7 @@ import { TrackingTransactionService } from '../../services/tracking-transaction.
 export class CreateComponent  {
 
   transaction = {} as CreateTransaction;
-
+  create: Boolean = true;
 
   constructor(private accountsServices: TrackingAccountService, private transactionsServices: TrackingTransactionService) {}
 
@@ -31,7 +31,7 @@ export class CreateComponent  {
       accountId: form.value.accountId
     };
 
-    console.log(this.transactionsServices.create(this.transaction));
+    this.transactionsServices.create(this.transaction);
 
     form.reset();
   }
