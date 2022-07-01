@@ -1,5 +1,5 @@
 <!-- SEARCH -->
-<div class="row">
+<div class="row g-3">
   <div class="col">
     <form (ngSubmit)="buscar()" autocomplete="off">
       <input
@@ -9,9 +9,18 @@
         [(ngModel)]="term"
         placeholder="Buscar por descripcion..."
         >
-    </form>
-  </div>
+      </form>
+    </div>
 </div>
+<br>
+
+<div *ngIf="orderBy; else orderByZA">
+  <button class="btn btn-success" type="button" (click)="Sort()">Ordenar (A - Z)</button>
+</div>
+
+<ng-template #orderByZA>
+  <button class="btn btn-warning" type="button" (click)="Sort()">Ordenar (Z - A)</button>
+</ng-template>
 <hr>
 
 <!-- ERROR CUANDO NO EXISTE  -->
@@ -25,7 +34,7 @@
 </div>
 
 <div class="row">
-    <div *ngFor="let transaction of transactions" class="col-md-4 col-sm-6">
+    <div *ngFor="let transaction of transactions" class="col-md-4 col-sm-6" >
       <div class="card border-info mb-3">
         <div class="card-header">
           <ul class="nav nav-pills card-header-pills">

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Transaction } from '../../interfaces/Transactions.interface';
 import { TrackingTransactionService } from '../../services/tracking-transaction.service';
 
 @Component({
@@ -11,14 +12,29 @@ export class ResultComponent {
 
   term: string = '';
   exist:boolean = true;
+  orderBy: boolean = true;
   delete: boolean = false;
+  transaction: Transaction[] = [];
 
   constructor(private trackingTransactionService: TrackingTransactionService) {
     this.trackingTransactionService.getall();
   }
 
   get transactions(){
-    return this.trackingTransactionService.transactions;
+    this.transaction = this.trackingTransactionService.transactions;
+    return this.transaction
+
+  }
+
+  Sort(){
+    if(this.orderBy){
+      this.transaction = this.transaction.sort((a,b) => a.concept.localeCompare(b.concept));
+      this.orderBy = false;
+    }
+    else{
+      this.transaction = this.transaction.sort((a,b) => -1 * a.concept.localeCompare(b.concept));
+      this.orderBy = true;
+    }
   }
 
   buscar(){
