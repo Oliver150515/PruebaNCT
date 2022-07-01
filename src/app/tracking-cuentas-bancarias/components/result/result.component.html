@@ -12,7 +12,6 @@
     </form>
   </div>
 </div>
-
 <hr>
 
 <!-- ERROR CUANDO NO EXISTE  -->
@@ -20,41 +19,26 @@
   No existe transacciones con ese termino
 </div>
 
-
-<div class="row">
-  <div *ngFor="let transaction of transactions" class="col-md-4 col-sm-6">
-    <div class="card border-info mb-3">
-      <div class="card-header">
-        <ul class="nav nav-pills card-header-pills">
-          <li class="nav-item"><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrarTransaccion">Borrar</button></li>
-          <br>
-          <li class="nav-item"><a class="nav-link" href="transaction/{{transaction.id}}">Detalle</a></li>
-        </ul>
-      </div>
-      <div class="card-body">
-        <p class="card-text">{{transaction.concept}}</p>
-      </div>
-    </div>
-  </div>
+<!-- AVISO DE ELIMINAR -->
+<div *ngIf="delete" class="alert alert-info">
+  Eliminacion Completada
 </div>
 
-
-<!-- MODAL -->
-<div class="modal fade" id="borrarTransaccion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Eliminar:</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-       <p>Seguro que quiere eliminar la transaccion ?</p>
-       No se podran recuperar los datos una vez borrados
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Borrar</button>
+<div class="row">
+    <div *ngFor="let transaction of transactions" class="col-md-4 col-sm-6">
+      <div class="card border-info mb-3">
+        <div class="card-header">
+          <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item" *ngIf="transaction.candidateId == 'ac94e764-473b-46f5-8808-70b76824a029'">
+              <button class="btn btn-danger" type="button" (click)="eliminar(transaction.id, transaction.concept)" >Borrar</button>
+            </li>
+            <br>
+            <li class="nav-item"><a class="nav-link" href="transaction/{{transaction.id}}">Detalle</a></li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{transaction.concept}}</p>
+        </div>
       </div>
     </div>
-  </div>
 </div>

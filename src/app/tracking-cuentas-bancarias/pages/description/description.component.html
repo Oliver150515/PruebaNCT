@@ -1,1 +1,66 @@
-<p>description works!</p>
+<h2>Descripcion</h2>
+<hr>
+
+<div class="alert alert-info" *ngIf="!transaction; else divDescription">
+  Cargando datos...
+</div>
+
+
+<ng-template #divDescription>
+
+  <!-- information   -->
+  <form novalidate autocomplete="off" (ngSubmit)="update(f)" #f="ngForm"
+    *ngIf="transaction.candidateId != 'ac94e764-473b-46f5-8808-70b76824a029'; else Icreated">
+    <div class="row g-3" >
+      <div class="col-md-5">
+        <label for="txtConcept" class="form-label">Concept</label>
+        <input type="text" class="form-control" name="concept" [(ngModel)]="transaction.concept" disabled="true">
+      </div>
+      <div class="col-md-4" *ngIf="transaction.description">
+        <label for="txtDescription" class="form-label">Description</label>
+        <input type="text" class="form-control" name="description" [(ngModel)]="transaction.description" disabled="true">
+      </div>
+      <div class="col-md-4">
+        <label for="txtAmmount" class="form-label">Ammount</label>
+        <input type="number" class="form-control"  name="ammount" [(ngModel)]="transaction.ammount" disabled="true">
+      </div>
+      <div class="col-md-3">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" class="form-control" name="date" [ngModel]="transaction.date | date:'yyyy-MM-dd'" disabled="true">
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary" [disabled]="!f.valid" type="submit">Update</button>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+
+
+<ng-template #Icreated>
+
+  <!-- information   -->
+  <form novalidate autocomplete="off" (ngSubmit)="update(f)" #f="ngForm">
+    <div class="row g-3" >
+      <div class="col-md-5">
+        <label for="txtConcept" class="form-label">Concept</label>
+        <input type="text" class="form-control" name="concept" [(ngModel)]="transaction.concept" required>
+      </div>
+      <div class="col-md-4" *ngIf="transaction.description">
+        <label for="txtDescription" class="form-label">Description</label>
+        <input type="text" class="form-control" name="description" [(ngModel)]="transaction.description" required>
+      </div>
+      <div class="col-md-4">
+        <label for="txtAmmount" class="form-label">Ammount</label>
+        <input type="number" class="form-control"  name="ammount" [(ngModel)]="transaction.ammount" required>
+      </div>
+      <div class="col-md-3">
+        <label for="date" class="form-label">Date</label>
+        <input type="date" class="form-control" name="date" [ngModel]="transaction.date | date:'yyyy-MM-dd'"required>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary" [disabled]="!f.valid" type="submit">Update</button>
+      </div>
+    </div>
+  </form>
+</ng-template>
