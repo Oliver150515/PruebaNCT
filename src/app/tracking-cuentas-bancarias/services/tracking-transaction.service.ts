@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CreateTransaction, Transaction, Transactions } from '../interfaces/Transactions.interface';
+import { CreateTransaction, Transaction, Transactions, UpdateTransaction } from '../interfaces/Transactions.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +61,26 @@ export class TrackingTransactionService {
           "date": transaction.date,
           "accountId": transaction.accountId,
           "candidateId": "ac94e764-473b-46f5-8808-70b76824a029"
+        },
+        {
+          headers: this.httpHeaders
+        }
+      ).subscribe((resp) => {
+        this.getall();
+      }
+    );
+  }
+
+  update(transaction: UpdateTransaction){
+    const url = `${this.apiUrlBase}/transactions`;
+
+    this.http.put<Transactions>(url,
+        {
+          "id": transaction.id,
+          "concept": transaction.concept,
+          "description": transaction.description,
+          "ammount": transaction.ammount,
+          "date": transaction.date,
         },
         {
           headers: this.httpHeaders

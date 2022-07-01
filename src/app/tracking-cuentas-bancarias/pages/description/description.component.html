@@ -7,6 +7,14 @@
 
 
 <ng-template #divDescription>
+  <div *ngIf="updated" class="col">
+    <div class="card border-info mb-3">
+      <div class="card-body">
+        <p class="card-text">Transaction Updated</p>
+      </div>
+    </div>
+  </div>
+
 
   <!-- information   -->
   <form novalidate autocomplete="off" (ngSubmit)="update(f)" #f="ngForm"

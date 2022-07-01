@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { Transaction } from '../../interfaces/Transactions.interface';
+import { Transaction, UpdateTransaction } from '../../interfaces/Transactions.interface';
 import { TrackingTransactionService } from '../../services/tracking-transaction.service';
 
 @Component({
@@ -14,14 +14,10 @@ import { TrackingTransactionService } from '../../services/tracking-transaction.
 export class DescriptionComponent implements OnInit {
 
   transaction!: Transaction;
-
+  updateTransaction!: UpdateTransaction;
+  updated: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private trackingTransactionService: TrackingTransactionService) {
-    this.trackingTransactionService.getall();
-  }
-
-  get transactions(){
-    return this.trackingTransactionService.transactions;
   }
 
   ngOnInit(): void {
@@ -42,8 +38,14 @@ export class DescriptionComponent implements OnInit {
   }
 
   update(form: NgForm){
-
+    this.updateTransaction = {
+      id: this.transaction.id,
+      concept: form.value.concept.toUpperCase(),
+      description: form.value.description,
+      ammount: form.value.ammount,
+      date: form.value.date,
+    }
+    this.trackingTransactionService.update(this.updateTransaction);
+    this.updated = true;
   }
-
-
 }

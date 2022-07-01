@@ -23,3 +23,11 @@ export interface CreateTransaction {
   date:        Date;
   accountId:   string;
 }
+
+export interface UpdateTransaction{
+  id:          string;
+  concept:     string;
+  description: string;
+  ammount:     number;
+  date:        Date;
+}
