@@ -19,12 +19,17 @@
   No existe transacciones con ese termino
 </div>
 
+<!-- AVISO DE ELIMINAR -->
+<div *ngIf="delete" class="alert alert-info">
+  Eliminacion Completada
+</div>
+
 <div class="row">
     <div *ngFor="let transaction of transactions" class="col-md-4 col-sm-6">
       <div class="card border-info mb-3">
         <div class="card-header">
           <ul class="nav nav-pills card-header-pills">
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="transaction.candidateId == 'ac94e764-473b-46f5-8808-70b76824a029'">
               <button class="btn btn-danger" type="button" (click)="eliminar(transaction.id, transaction.concept)" >Borrar</button>
             </li>
             <br>

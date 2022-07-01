@@ -1,7 +1,11 @@
 <h2>NEW TRANSACTION</h2>
 <hr>
 
-<form novalidate (ngSubmit)="Create(f)" #f="ngForm">
+<div *ngIf="create" class="alert alert-info">
+  Creacion Completa
+</div>
+
+<form novalidate (ngSubmit)="Create(f)" #f="ngForm" autocomplete="off">
   <div *ngIf="f.invalid" class="col">
     <div class="card border-danger mb-3">
       <div class="card-body">

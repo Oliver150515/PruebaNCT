@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Transaction } from '../../interfaces/Transactions.interface';
 import { TrackingTransactionService } from '../../services/tracking-transaction.service';
 
 @Component({
@@ -12,16 +11,19 @@ export class ResultComponent {
 
   term: string = '';
   exist:boolean = true;
+  delete: boolean = false;
 
   constructor(private trackingTransactionService: TrackingTransactionService) {
     this.trackingTransactionService.getall();
-   }
+  }
 
   get transactions(){
     return this.trackingTransactionService.transactions;
   }
 
   buscar(){
+    this.delete = false;
+
     if(this.term.length > 0){
       this.exist = this.trackingTransactionService.getByName(this.term);
 
@@ -36,8 +38,17 @@ export class ResultComponent {
   }
 
   eliminar(id: string, concept: string){
+
     if(confirm("Borar el elemento: "+ concept)){
-      console.log(id);
+      this.trackingTransactionService.delete(id)
+        .subscribe((resp)=>{
+         this.delete = resp.success;
+         this.trackingTransactionService.getall();
+        }
+      );
+      this.delete = true;
+      this.term = '';
     }
   }
+
 }

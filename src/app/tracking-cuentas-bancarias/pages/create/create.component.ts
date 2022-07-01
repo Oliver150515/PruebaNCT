@@ -13,19 +13,21 @@ import { TrackingTransactionService } from '../../services/tracking-transaction.
 export class CreateComponent  {
 
   transaction = {} as CreateTransaction;
-  create: Boolean = true;
+  create: Boolean = false;
 
-  constructor(private accountsServices: TrackingAccountService, private transactionsServices: TrackingTransactionService) {}
+  constructor(
+      private accountsServices: TrackingAccountService,
+      private transactionsServices: TrackingTransactionService
+    ){}
 
   get Accounts() {
     return this.accountsServices.accounts;
   }
 
   Create(form: NgForm){
-    console.log(form.value);
     this.transaction = {
       concept: form.value.concept.toUpperCase(),
-      description: form.value.description.toLowerCase(),
+      description: form.value.description,
       ammount: form.value.ammount,
       date: form.value.date,
       accountId: form.value.accountId
@@ -34,5 +36,7 @@ export class CreateComponent  {
     this.transactionsServices.create(this.transaction);
 
     form.reset();
+    console.log(this.transaction);
+    this.create = true;
   }
 }
